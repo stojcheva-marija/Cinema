@@ -1,0 +1,73 @@
+﻿@model List<Cinema.Domain.Domain_models.Ticket>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h4 class="text-center text-uppercase m-3">Tickets</h4>
+<hr />
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <form asp-action="ExportTickets" method="post">
+                <div class="form-group">
+                    <label for="Genre" class="control-label"></label>
+                    <input name="Genre" class="form-control" />
+                    <span class="pt-2 pl-1 mt-2 font-weight-500">Input a specified genre to export those tickets</span>
+                    <button class="btn mt-2" style="background-color: #ECD4D4" type="submit">Export Tickets</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="col">
+            <form asp-action="Index" method="post">
+                <label for="FilterDate" class="control-label"></label>
+                <input name="FilterDate" class="form-control" type="date" />
+                <span class="pt-2 pl-2 mt-2 font-weight-500">Select a date to filter all tickets valid to that date</span>
+                <button class="btn mt-2" style="background-color: #ECD4D4" type="submit">Filter tickets</button>
+            </form>
+        </div>
+    </div>
+
+    @if (User.IsInRole("ADMINISTRATOR")) { 
+    <div class="row mt-2 ml-1">
+        <a class="btn" asp-action="Create" style="background-color: #CCDBE2">Add new Ticket</a>
+    </div>
+    }
+
+    @for (int i = 0; i < Model.Count; i++)
+    {
+        var item = Model[i];
+
+        if (i % 3 == 0)
+        {
+            @:<div class="row">
+            }
+
+            <div class="col-md-3 m-4">
+                <div class="card" style="background-color: #f8f7ff; border: 2px solid #85c7de; ">
+                    <h4 class="card-title text-center">@item.MovieName</h4>
+                    <div class="card-block">
+                        <p class="card-title text-center"> <i class="fas fa-calendar" style="color: #85c7de; "></i> @item.Date.ToShortDateString()</p>
+                        <p class="card-text text-center"><i class="far fa-clock" style="color: #85c7de; "></i> @item.Time</p>
+                        <p class="card-text text-center text-uppercase font-weight-bold"> @item.Genre</p>
+                        <h6 class="pt-2 text-center">Price: $@item.Price</h6>
+                        <div class="card-footer mb-2 text-center">
+                            @if (User.IsInRole("ADMINISTRATOR") || User.IsInRole("USER"))
+                            {
+                                <a asp-controller="Tickets" asp-action="AddTicketToCart" asp-route-id="@item.Id" class="btn my-1" style="background-color: #85c7de; color: white ">Add to Cart</a>
+                            }
+                            @if(User.IsInRole("ADMINISTRATOR")){
+                            <a asp-controller="Tickets" asp-action="Edit" asp-route-id="@item.Id" class="btn my-1" style="background-color: #FFB26B; color: white">Edit</a>
+                            <a asp-controller="Tickets" asp-action="Delete" asp-route-id="@item.Id" class="btn my-1" style="background-color: #ee6969; color: white">Delete</a> }
+                        </div>
+                    </div>
+                </div>
+            </div> if (i % 3 == 2)
+            {
+            @:</div>
+        }
+    }
+</div>

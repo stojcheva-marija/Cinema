@@ -1,0 +1,31 @@
+﻿@model Cinema.Domain.DTO.AddToShoppingCartDto
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<h4 class="text-center text-uppercase m-3">Add ticket to your shopping cart</h4>
+<hr />
+
+
+<div class="row">
+    <div class="col-md-4 m-auto">
+        <form asp-action="AddTicketToCart" method="post">
+            <input type="hidden" asp-for="TicketId" />
+            <div class="form-group">
+                <label asp-for="SelectedTicket.MovieName"></label>
+                <input disabled asp-for="SelectedTicket.MovieName" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Quantity"></label>
+                <input type="number" asp-for="Quantity" class="form-control" />
+            </div>
+
+            <div class="form-group text-center">
+                <input type="submit" value="Save" class="btn" style="background-color: #85c7de" />
+            </div>
+        </form>
+    </div>
+</div>

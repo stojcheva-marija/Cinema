@@ -1,0 +1,33 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<Cinema.Domain.Identity.ShopApplicationUser> SignInManager
+@inject UserManager<Cinema.Domain.Identity.ShopApplicationUser> UserManager
+
+    <style>
+        a {
+            font-size: 14px;
+            font-weight: 700
+        }
+    </style>
+
+<ul class="navbar-nav">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <li class="nav-item">
+            <a class="nav-link mx-2 text-uppercase" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity.Name!</a>
+        </li>
+        <li class="nav-item">
+            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <button type="submit" class="nav-link btn btn-link mx-2 text-uppercase" style=" font-size: 14px; font-weight: 700">Logout</button>
+            </form>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link mx-2 text-uppercase" asp-area="Identity" asp-page="/Account/Register">Register</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link mx-2 text-uppercase" asp-area="Identity" asp-page="/Account/Login">Login</a>
+        </li>
+    }
+</ul>

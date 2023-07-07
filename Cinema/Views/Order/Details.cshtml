@@ -1,0 +1,44 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+
+@model Cinema.Domain.Domain_models.Order
+
+<div class="container">
+
+    <p>
+        <a class="btn btn-warning m-3" style="background-color: #FAEDCB; border-color: 1px solid #F7D9C4">@Model.User.Email - @Model.User.Name @Model.User.Surname</a>
+    </p>
+
+    @for (int i = 0; i < Model.TicketInOrders.Count; i++)
+    {
+        var item = Model.TicketInOrders.ElementAt(i);
+
+        if (i % 3 == 0)
+        {
+            @:<div class="row">
+            }
+
+            <div class="col-md-3 m-4">
+                <div class="card" style="background-color: #f8f7ff; border: 2px solid #85c7de; ">
+                    <h4 class="card-title text-center">@item.Ticket.MovieName</h4>
+                    <div class="card-block">
+                        <p class="card-title text-center"> <i class="fas fa-calendar" style="color: #85c7de; "></i> @item.Ticket.Date.ToShortDateString()</p>
+                        <p class="card-text text-center"><i class="far fa-clock" style="color: #85c7de; "></i> @item.Ticket.Time</p>
+                        <p class="card-text text-center text-uppercase font-weight-bold"> @item.Ticket.Genre</p>
+                        <h6 class="pt-2 text-center">Price: $@item.Ticket.Price</h6>
+                        <h6 class="pt-2 text-center">Quantity: @item.Quantity</h6>
+                        <hr />
+                        <h6 class="pt-2 text-center">Total: $@(item.Ticket.Price * item.Quantity)</h6>
+                    </div>
+                </div>
+            </div> if (i % 3 == 2)
+            {
+            @:</div>
+        }
+    }
+
+</div>

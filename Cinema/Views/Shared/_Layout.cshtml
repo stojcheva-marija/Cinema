@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Cinema</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+        a {
+            font-size: 14px;
+            font-weight: 700
+        }
+
+        .superNav {
+            font-size: 13px;
+        }
+
+        .form-control {
+            outline: none !important;
+            box-shadow: none !important;
+        }
+        }
+    </style>
+</head>
+
+
+<body>
+    <header>
+        <div class="superNav border-bottom py-2 bg-light">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <select class="me-3 border-0 bg-light">
+                            <option value="en-us">EN-US</option>
+                        </select>
+                        <span class="d-none d-lg-inline-block d-md-inline-block d-sm-inline-block d-xs-none me-3"><strong>tickets@cinema.com</strong></span>
+                        <span class="me-3"><i class="fa-solid fa-phone me-1 text-warning" style="color: #ECD4D4"></i> <strong>02-20-31-822</strong></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <nav class="navbar navbar-expand-lg bg-white sticky-top navbar-light p-3 shadow-sm">
+            <div class="container">
+                <a class="navbar-brand" href="#"><i class="fa-solid fa-film"></i><strong>CINEMA</strong></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class=" collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav ms-auto ">
+                        <li class="nav-item">
+                            <a class="nav-link mx-2 text-uppercase" aria-current="page" asp-area="" asp-controller="Tickets" asp-action="Index">Tickets</a>
+                        </li>
+                        @if (User.IsInRole("ADMINISTRATOR"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link mx-2 text-uppercase" asp-area="" asp-controller="Order" asp-action="Index">Orders</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link mx-2 text-uppercase" asp-area="" asp-controller="User" asp-action="ImportUsers">Register Users with Excel</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link mx-2 text-uppercase" asp-area="" asp-controller="Account" asp-action="AddRole">Add Role</a>
+                            </li>
+                        }
+                        </ul>
+                    <ul class="navbar-nav ml-auto">
+                        @if (User.IsInRole("ADMINISTRATOR") || User.IsInRole("USER"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link mx-2 text-uppercase" asp-area="" asp-controller="ShoppingCart" asp-action="Index"><i class="fa-solid fa-cart-shopping me-1"></i></a>
+                            </li>
+                        }
+                            <partial name="_LoginPartial" />
+                        </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2023 - Cinema
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
