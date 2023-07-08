@@ -18,4 +18,9 @@ Cinema is an e-commerce site designed for selling cinema tickets online. The web
 
 ## Preview
 
-To see a preview of the application, you can visit the following link: [Cinema Preview](https://github.com/stojcheva-marija/Cinema/assets/86073806/9499b87a-6af6-432c-a703-c44456c9fe94)
+To see a preview of the application, you can visit the following link: [Cinema Preview](https://github.com/stojcheva-marija/Cinema/assets/86073806/7ed8ef94-e3d1-48aa-a69c-2d2562232828)
+
+
+
+
+
